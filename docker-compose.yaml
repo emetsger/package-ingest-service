@@ -1,0 +1,21 @@
+version: "2"
+
+services:
+
+  samba:
+    image: emetsger/pis_samba:latest
+    container_name: pis_samba
+    ports:
+      - "445:445"
+    volumes_from:
+      - dcs
+
+  dcs:
+    image: emetsger/pis_dcs:latest
+    container_name: pis_dcs
+    command: /usr/bin/launch.sh
+    ports:
+      - "8080:8080"
+      - "8181:8181"
+    volumes:
+      - /shared
